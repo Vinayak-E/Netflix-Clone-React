@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 
 
-export const TitleCards = ({title,category}) => {
+export const TitleCards = ({title,category,pageNum}) => {
   const [apiData,setApiData] = useState([]);
   const cardsRef = useRef();
   
@@ -31,7 +31,7 @@ const handlewheel = (event)=>{
 useEffect(()=>{
 
 
-  fetch(`https://api.themoviedb.org/3/movie/${category? category:"now_playing"}?language=en-US&page=1`, options)
+  fetch(`https://api.themoviedb.org/3/movie/${category? category:"now_playing"}?language=en-US&page=${pageNum ?pageNum:3}`, options)
     .then(res => res.json())
     .then(res => setApiData(res.results))
     .catch(err => console.error(err));
